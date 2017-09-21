@@ -23,7 +23,10 @@
                   <%=c.name%>
                 <%end%>
               </td>
-              <td>Editar Borrar</td>
+              <td>
+                <%= link_to 'Editar', edit_product_path(product) %>
+                Borrar
+              </td>
             </tr>
           <% end %>
         </tbody>

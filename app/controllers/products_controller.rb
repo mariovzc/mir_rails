@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
   before_action :set_categories, only: [:new, :edit]
+  before_action :set_product, only: [:edit, :update, :destroy]
+  
   attr_accessor :product_categories_attributes
+
   def index
     @products = Product.all
   end
@@ -8,6 +11,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
   end
+
   def create
     @product = Product.new(product_params)  
     if @product.save
@@ -19,10 +23,26 @@ class ProductsController < ApplicationController
 
   def edit
   end
+
+  def update
+    @product.product_categories.destroy_all
+    if @product.update(product_params)
+      redirect_to root_url
+    else
+      render :edit
+    end
+  end
+
   private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
   def set_categories
     @categories = Category.all
   end
+
   def product_params
     params.require(:product).permit(:name, :price, :product_categories_attributes =>[:_destroy,:category_id])
     
