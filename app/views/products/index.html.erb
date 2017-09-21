@@ -1,2 +1,26 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<h1>Products</h1>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Categorias</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%=product.name%></td>
+          <td><%=product.price%></td>
+          <td>
+            <%product.categories.each do |c| %>
+              <%=c.name%>
+            <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
