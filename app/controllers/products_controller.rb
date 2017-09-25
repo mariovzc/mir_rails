@@ -30,6 +30,11 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    @product.destroy
+    redirect_to root_url
+  end
+
   protected
   def set_product
     @product = Product.find(params[:id])
