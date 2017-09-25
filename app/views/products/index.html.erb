@@ -1,38 +1,24 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h1>Products</h1>
-    <div class="text-right">
-      <%=link_to "Nuevo Producto", new_product_path, class: 'btn btn-primary btn-lg'%>
-    </div>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Categorias</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @products.each do |product| %>
-            <tr>
-              <td><%=product.name%></td>
-              <td><%=number_to_currency(product.price)%></td>
-              <td>
-                <%product.categories.each do |c| %>
-                  <%=c.name%>
-                <%end%>
-              </td>
-              <td>
-                <div>                    
-                    <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe, edit_product_path(product) %>
-                    <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'delete_product' %>     
-                </div>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Producto</th>
+    <th>Precio</th>
+    <th>Categorias</th>
+    <th>Acciones</th>
+  </tr>
+  <% @products.each do |product| %>
+  <tr>
+    <td><%= product.id %></td>
+    <td><%= product.name %></td>
+    <td><%= product.price %></td>
+    <td>
+      <% product.categories.each do |categories| %>
+          <%= categories.name %>
+        <% end %>
+    </td>
+    <td><%= link_to 'Editar', edit_product_path(product) %></td>
+    <% end %>
+  </tr>
+</table>
+<br>
+<%= link_to 'Crear Producto', new_product_path() %>
