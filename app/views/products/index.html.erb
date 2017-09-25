@@ -24,8 +24,10 @@
                 <%end%>
               </td>
               <td>
-                <%= link_to 'Editar', edit_product_path(product) %>
-                Borrar
+                <div>                    
+                    <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe, edit_product_path(product) %>
+                    <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, product, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_product' %>     
+                </div>
               </td>
             </tr>
           <% end %>

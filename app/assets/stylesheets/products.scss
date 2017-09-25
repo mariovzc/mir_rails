@@ -4,3 +4,19 @@
     margin-left: 10px;
   }
 }
+.table{
+  td{
+    font-size: 15px;
+    div{
+      display: flex;
+      display: -webkit-inline-flex;
+      a{
+        font-size: 25px;
+        margin-left: 5px;
+      }
+      .delete_product{
+        color: red;
+      }
+    }
+  }
+}
