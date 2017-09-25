@@ -35,11 +35,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    
-    respond_to do |format|
-      format.json { head :no_content }
-      format.js   { render :layout => false }
-    end
+    redirect_to root_url
   end
 
   private
