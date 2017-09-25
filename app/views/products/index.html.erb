@@ -18,9 +18,8 @@
             <tr>
               <td><%=product.name%></td>
               <td><%=number_to_currency(product.price)%></td>
-              <td>
-                <%product.categories.each do |c| %>
-                  <%=c.name%>
+              <td><% product.categories.each do|p|%>
+                p.name
                 <%end%>
               </td>
               <td>

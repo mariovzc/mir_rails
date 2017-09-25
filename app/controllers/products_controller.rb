@@ -10,6 +10,8 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @product.categories.new
+    
   end
 
   def create
@@ -25,7 +27,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product.product_categories.destroy_all
     if @product.update(product_params)
       redirect_to root_url
     else
@@ -49,7 +50,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :price, :product_categories_attributes =>[:_destroy,:category_id])
+    params.require(:product).permit(:name, :price, :category_ids)
     
   end
 end
