@@ -1,9 +1,16 @@
-<%= form_for @product do |f| %>
-  <%= f.text_field :name, placeholder: "Nombre del producto" %><br>
-  <br>
-  <%= f.text_field :price, placeholder: "Precio del Producto" %><br>
-  <br>
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %><br>
-    <br>
-  <%= f.submit "Crear producto" %>
-<% end %>
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <h2 class="is-size-2 has-text-centered">Nuevo Producto</h2>
+    <%= form_for @product, class:'form' do |f| %>
+      <%= render 'form', f: f%>
+      <div class="field is-grouped is-grouped-centered">
+        <div class="control">
+            <button class="button is-primary">Guardar</button>
+        </div>
+        <div class="control">
+          <%= link_to  "Cancelar", :back, class: 'button is-light' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
