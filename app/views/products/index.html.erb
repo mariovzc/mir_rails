@@ -1,24 +1,48 @@
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Producto</th>
-    <th>Precio</th>
-    <th>Categorias</th>
-    <th>Acciones</th>
-  </tr>
-  <% @products.each do |product| %>
-  <tr>
-    <td><%= product.id %></td>
-    <td><%= product.name %></td>
-    <td><%= product.price %></td>
-    <td>
-      <% product.categories.each do |categories| %>
-          <%= categories.name %>
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <h2 class="is-size-2 has-text-centered">
+      Productos
+    </h2>
+    <div class="has-text-right">
+      <%= link_to 'Crear Producto', new_product_path, class: 'button is-primary' %>        
+    </div>
+    </br>
+    <table class="table is-bordered is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <th>
+            Producto
+          </th>
+          <th>
+            Precio
+          </th>
+          <th>
+            Categorias
+          </th>
+          <th>
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td>
+              <%= product.name %>
+            </td>
+            <td>
+              <%= product.price %>
+            </td>
+            <td>
+              <%=product.categories.pluck(:name).join(",")%>
+            </td>
+            <td>
+              <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe, edit_product_path(product) %>
+              <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'delete_product' %>
+            </td>
+          </tr>
         <% end %>
-    </td>
-    <td><%= link_to 'Editar', edit_product_path(product) %></td>
-    <% end %>
-  </tr>
-</table>
+    </table>
+  </div>
+</div>
 <br>
-<%= link_to 'Crear Producto', new_product_path() %>
