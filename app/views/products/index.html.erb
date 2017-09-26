@@ -1,38 +1,48 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h1>Products</h1>
-    <div class="text-right">
-      <%=link_to "Nuevo Producto", new_product_path, class: 'btn btn-primary btn-lg'%>
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <h2 class="is-size-2 has-text-centered">
+      Productos
+    </h2>
+    <div class="has-text-right">
+      <%= link_to 'Crear Producto', new_product_path, class: 'button is-primary' %>        
     </div>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
+    </br>
+    <table class="table is-bordered is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <th>
+            Producto
+          </th>
+          <th>
+            Precio
+          </th>
+          <th>
+            Categorias
+          </th>
+          <th>
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
           <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Categorias</th>
+            <td>
+              <%= product.name %>
+            </td>
+            <td>
+              <%= product.price %>
+            </td>
+            <td>
+              <%=product.categories.pluck(:name).join(",")%>
+            </td>
+            <td>
+              <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe, edit_product_path(product) %>
+              <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'delete_product has-text-danger' %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @products.each do |product| %>
-            <tr>
-              <td><%=product.name%></td>
-              <td><%=number_to_currency(product.price)%></td>
-              <td>
-                <%product.categories.each do |c| %>
-                  <%=c.name%>
-                <%end%>
-              </td>
-              <td>
-                <div>                    
-                    <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe, edit_product_path(product) %>
-                    <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'delete_product' %>     
-                </div>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+    </table>
   </div>
 </div>
+<br>

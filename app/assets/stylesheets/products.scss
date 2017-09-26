@@ -1,21 +1,12 @@
-.check{
-  label{
-    font-weight: normal;
-    margin-left: 10px;
-  }
-}
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
 .table{
-  td{
-    font-size: 15px;
-    div{
-      display: flex;
-      display: -webkit-inline-flex;
+  tr{
+    td{
       a{
-        font-size: 25px;
-        margin-left: 5px;
-      }
-      .delete_product{
-        color: red;
+        font-size: 20px;
+        margin-left: 20px;
       }
     }
   }

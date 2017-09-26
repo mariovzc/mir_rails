@@ -1,21 +1,19 @@
 class ProductsController < ApplicationController
-  before_action :set_categories, only: [:new, :edit]
-  before_action :set_product, only: [:edit, :update, :destroy]
-  
-  attr_accessor :product_categories_attributes
-
+  before_action :set_product, only: [:edit,:update, :destroy]
   def index
     @products = Product.all
   end
 
   def new
     @product = Product.new
+    @categories = Category.all
+    @product.categories.new
   end
 
   def create
-    @product = Product.new(product_params)  
-    if @product.save
-      redirect_to root_url
+    @product = Product.new(product_params)
+    if @product.save      
+      redirect_to root_path      
     else
       render :new
     end
@@ -25,9 +23,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product.product_categories.destroy_all
     if @product.update(product_params)
-      redirect_to root_url
+      redirect_to root_path
     else
       render :edit
     end
@@ -38,18 +35,11 @@ class ProductsController < ApplicationController
     redirect_to root_url
   end
 
-  private
-
+  protected
   def set_product
     @product = Product.find(params[:id])
   end
-
-  def set_categories
-    @categories = Category.all
-  end
-
   def product_params
-    params.require(:product).permit(:name, :price, :product_categories_attributes =>[:_destroy,:category_id])
-    
+    params.require(:product).permit(:name, :price, category_ids: [])
   end
 end
